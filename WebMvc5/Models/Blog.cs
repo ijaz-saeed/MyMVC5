@@ -12,7 +12,7 @@ namespace WebMvc5.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
         [MaxLength(50)]
         public string Url { get; set; }
 

@@ -23,13 +23,13 @@ namespace WebMvc5.Controllers
             int pageSize = 5;
             int pageNumber = (page ?? 1);
 
-            return View(blogRepo.GetAll().OrderByDescending(b=> b.Id).ToPagedList(pageNumber, pageSize));
+            return View(blogRepo.GetAll().AsNoTracking().OrderByDescending(b=> b.Id).ToPagedList(pageNumber, pageSize));
         }
 
         // Ajax get experiment
         public ActionResult Index2()
         {
-            return View(blogRepo.GetAll().ToList());
+            return View(blogRepo.GetAll().AsNoTracking().ToList());
         }
 
         // GET: /Blog/Details/5
