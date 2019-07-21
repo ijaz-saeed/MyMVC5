@@ -154,6 +154,14 @@
     <Compile Include="Migrations\201609041006571_BlogDescAdded.Designer.cs">
       <DependentUpon>201609041006571_BlogDescAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907211003337_RowVersion-to-blog.cs" />
+    <Compile Include="Migrations\201907211003337_RowVersion-to-blog.Designer.cs">
+      <DependentUpon>201907211003337_RowVersion-to-blog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907211043285_RowVersion-to-blog-2.cs" />
+    <Compile Include="Migrations\201907211043285_RowVersion-to-blog-2.Designer.cs">
+      <DependentUpon>201907211043285_RowVersion-to-blog-2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\BlogDbContext.cs" />
@@ -194,6 +202,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609041006571_BlogDescAdded.resx">
       <DependentUpon>201609041006571_BlogDescAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907211003337_RowVersion-to-blog.resx">
+      <DependentUpon>201907211003337_RowVersion-to-blog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907211043285_RowVersion-to-blog-2.resx">
+      <DependentUpon>201907211043285_RowVersion-to-blog-2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,6 +11,13 @@ namespace WebMvc5.DAL.IRepository
         where T : class
         where C : DbContext, new()
     {
+        public GenericRepository()
+        {
+#if DEBUG
+           Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+#endif
+
+        }
 
         private C _entities = new C();
         public C Context
@@ -23,7 +30,7 @@ namespace WebMvc5.DAL.IRepository
         public virtual IQueryable<T> GetAll()
         {
 
-            IQueryable<T> query = _entities.Set<T>();
+            IQueryable<T> query = _entities.Set<T>().AsNoTracking();
             return query;
         }       
 

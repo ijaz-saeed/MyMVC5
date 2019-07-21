@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(WebMvc5.Models.BlogDbContext),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsed44aa0ed81ac6278f8f8f3d03222da55de0998c92f8e149e5a6ba5a87c7dab8))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets8aaacc7c427dc71b51c51a5f37a9368ea0c239df9409420d5a8e4da87bf86e94))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework 6 Power Tools", "0.9.2.0")]
-    internal sealed class ViewsForBaseEntitySetsed44aa0ed81ac6278f8f8f3d03222da55de0998c92f8e149e5a6ba5a87c7dab8 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySets8aaacc7c427dc71b51c51a5f37a9368ea0c239df9409420d5a8e4da87bf86e94 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "ed44aa0ed81ac6278f8f8f3d03222da55de0998c92f8e149e5a6ba5a87c7dab8"; }
+            get { return "8aaacc7c427dc71b51c51a5f37a9368ea0c239df9409420d5a8e4da87bf86e94"; }
         }
 
         /// <summary>
@@ -78,12 +78,13 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Blog
-        [CodeFirstDatabaseSchema.Blog](T1.Blog_Id, T1.Blog_Url, T1.Blog_Description)
+        [CodeFirstDatabaseSchema.Blog](T1.Blog_Id, T1.Blog_Url, T1.Blog_Description, T1.Blog_RowVersion)
     FROM (
         SELECT 
             T.Id AS Blog_Id, 
             T.Url AS Blog_Url, 
             T.Description AS Blog_Description, 
+            T.RowVersion AS Blog_RowVersion, 
             True AS _from0
         FROM BlogDbContext.Blogs AS T
     ) AS T1");
@@ -118,12 +119,13 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Blogs
-        [WebMvc5.Models.Blog](T1.Blog_Id, T1.Blog_Url, T1.Blog_Description)
+        [WebMvc5.Models.Blog](T1.Blog_Id, T1.Blog_Url, T1.Blog_Description, T1.Blog_RowVersion)
     FROM (
         SELECT 
             T.Id AS Blog_Id, 
             T.Url AS Blog_Url, 
             T.Description AS Blog_Description, 
+            T.RowVersion AS Blog_RowVersion, 
             True AS _from0
         FROM CodeFirstDatabase.Blog AS T
     ) AS T1");

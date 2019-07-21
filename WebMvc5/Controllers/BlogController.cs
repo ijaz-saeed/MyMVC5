@@ -15,7 +15,12 @@ namespace WebMvc5.Controllers
 {
     public class BlogController : Controller
     {
-        private IBlogRepository blogRepo = new BlogRepository();
+        private IBlogRepository blogRepo;
+
+        public BlogController()
+        {
+            blogRepo = new BlogRepository();
+        }
 
         // GET: /Blog/
         public ActionResult Index(int? page)
@@ -91,7 +96,7 @@ namespace WebMvc5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Url,Description")] Blog blog)
+        public ActionResult Edit([Bind(Include = "Id,Url,Description,RowVersion")] Blog blog)
         {
             if (ModelState.IsValid)
             {
