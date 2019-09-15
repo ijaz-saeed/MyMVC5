@@ -23,12 +23,30 @@ namespace WebMvc5.Controllers
         }
 
         // GET: /Blog/
-        public ActionResult Index(int? page)
+        public ActionResult Index(string searchString, string currentFilter, int? page)
         {
             int pageSize = 5;
-            int pageNumber = (page ?? 1);
+            int pageNumber = (page ?? 1);            
 
-            return View(blogRepo.GetAll().AsNoTracking().OrderByDescending(b=> b.Id).ToPagedList(pageNumber, pageSize));
+            var allData = blogRepo.GetAll().AsNoTracking();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                page = 1;
+                searchString = searchString.Trim();                
+            }else
+            {
+                searchString = string.IsNullOrEmpty(currentFilter) ? "" : currentFilter.Trim();
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allData = allData.Where(b => b.Url.Contains(searchString) || b.Description.Contains(searchString));
+            }
+
+            return View(allData.OrderByDescending(b=> b.Id).ToPagedList(pageNumber, pageSize));
         }
 
         // Ajax get experiment

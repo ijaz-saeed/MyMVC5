@@ -11,6 +11,18 @@
 
 <h2>Index</h2>
 
+<div class="width50pcent">
+    @using (Html.BeginForm("Index", "Blog", FormMethod.Get))
+    {
+
+        <div class="input-control text floatRight" style=" width: 280px;">
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @PlaceHolder = "Search for records", @title = "Type any field value and press search" })
+            <button class="btn-search"> Search </button>
+        </div>
+    }
+    <br />
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")    
 </p>
@@ -45,4 +57,4 @@
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",      new { page  }))
+@Html.PagedListPager(Model, page => Url.Action("Index",      new { page, currentFilter = ViewBag.CurrentFilter }))
