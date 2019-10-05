@@ -13,13 +13,11 @@ using PagedList;
 
 namespace WebMvc5.Controllers
 {
-    public class BlogController : Controller
+    public class BlogController : BaseController
     {
-        private IBlogRepository blogRepo;
 
         public BlogController()
         {
-            blogRepo = new BlogRepository();
         }
 
         // GET: /Blog/
