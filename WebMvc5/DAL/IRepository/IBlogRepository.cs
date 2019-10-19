@@ -10,5 +10,6 @@ namespace WebMvc5.DAL.IRepository
     public interface IBlogRepository : IGenericRepository<Blog>
     {
         Blog GetById(int id);
+        Task<Blog> GetByIdAsync(int id);
     }
 }

@@ -10,6 +10,7 @@ using WebMvc5.DAL;
 using WebMvc5.DAL.IRepository;
 using WebMvc5.Models;
 using PagedList;
+using System.Threading.Tasks;
 
 namespace WebMvc5.Controllers
 {
@@ -48,19 +49,20 @@ namespace WebMvc5.Controllers
         }
 
         // Ajax get experiment
-        public ActionResult Index2()
+        public async Task<ActionResult> Index2()
         {
-            return View(blogRepo.GetAll().AsNoTracking().ToList());
+            return View(await blogRepo.GetAll().AsNoTracking().ToListAsync());
         }
 
         // GET: /Blog/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = blogRepo.GetById(id.Value);
+            Blog blog = await blogRepo.GetByIdAsync(id.Value);
+
             if (blog == null)
             {
                 return HttpNotFound();
@@ -93,13 +95,13 @@ namespace WebMvc5.Controllers
         }
 
         // GET: /Blog/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = blogRepo.GetById(id.Value);
+            Blog blog = await blogRepo.GetByIdAsync(id.Value);
             if (blog == null)
             {
                 return HttpNotFound();
@@ -124,13 +126,13 @@ namespace WebMvc5.Controllers
         }
 
         // GET: /Blog/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = blogRepo.GetById(id.Value);
+            Blog blog = await blogRepo.GetByIdAsync(id.Value);
             if (blog == null)
             {
                 return HttpNotFound();
@@ -141,9 +143,9 @@ namespace WebMvc5.Controllers
         // POST: /Blog/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Blog blog = blogRepo.GetById(id);
+            Blog blog = await blogRepo.GetByIdAsync(id);
             blogRepo.Delete(blog);
             blogRepo.Save();
             return RedirectToAction("Index");

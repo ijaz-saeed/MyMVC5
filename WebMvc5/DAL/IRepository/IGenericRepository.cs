@@ -17,6 +17,8 @@ namespace WebMvc5.DAL.IRepository
         void Edit(T entity);
         void Save();
 
+        Task<int> SaveAsync();
+
         void Dispose();
     }
 }

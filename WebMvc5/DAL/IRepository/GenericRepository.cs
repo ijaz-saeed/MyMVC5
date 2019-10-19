@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace WebMvc5.DAL.IRepository
@@ -14,7 +15,7 @@ namespace WebMvc5.DAL.IRepository
         public GenericRepository()
         {
 #if DEBUG
-           Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
 #endif
 
         }
@@ -32,7 +33,7 @@ namespace WebMvc5.DAL.IRepository
 
             IQueryable<T> query = _entities.Set<T>().AsNoTracking();
             return query;
-        }       
+        }
 
         public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
@@ -59,6 +60,13 @@ namespace WebMvc5.DAL.IRepository
         public virtual void Save()
         {
             _entities.SaveChanges();
+        }
+
+        public async virtual Task<int> SaveAsync()
+        {
+            int x = await _entities.SaveChangesAsync();
+
+            return x;
         }
 
         public void Dispose()
