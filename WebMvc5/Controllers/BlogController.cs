@@ -11,20 +11,29 @@ using WebMvc5.DAL.IRepository;
 using WebMvc5.Models;
 using PagedList;
 using System.Threading.Tasks;
+using WebMvc5.Core;
 
 namespace WebMvc5.Controllers
 {
+   
     public class BlogController : BaseController
     {
-
+        
         public BlogController()
         {
         }
 
+        /// <summary>
+        /// List Blogs
+        /// </summary>
+        /// <param name="searchString">search string</param>
+        /// <param name="currentFilter">current search</param>
+        /// <param name="page">page</param>
+        /// <returns>List of Blogs</returns>
         // GET: /Blog/
         public ActionResult Index(string searchString, string currentFilter, int? page)
         {
-            int pageSize = 5;
+            int pageSize = Consts.PageSize;
             int pageNumber = (page ?? 1);            
 
             var allData = blogRepo.GetAll().AsNoTracking();
@@ -48,12 +57,21 @@ namespace WebMvc5.Controllers
             return View(allData.OrderByDescending(b=> b.Id).ToPagedList(pageNumber, pageSize));
         }
 
+        /// <summary>
+        /// Get all Data
+        /// </summary>
+        /// <returns></returns>
         // Ajax get experiment
         public async Task<ActionResult> Index2()
         {
             return View(await blogRepo.GetAll().AsNoTracking().ToListAsync());
         }
 
+        /// <summary>
+        /// Get Blog by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: /Blog/Details/5
         public async Task<ActionResult> Details(int? id)
         {
