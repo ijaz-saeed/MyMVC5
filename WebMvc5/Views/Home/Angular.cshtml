@@ -6,12 +6,17 @@
 
 <app-root></app-root>
 
-@section scripts {
-
-    <script type="text/javascript" src="~/angular/my-mvc/dist/runtime.js"></script>
-    <script type="text/javascript" src="~/angular/my-mvc/dist/polyfills.js"></script>
-    <script type="text/javascript" src="~/angular/my-mvc/dist/styles.js"></script>
-    <script type="text/javascript" src="~/angular/my-mvc/dist/vendor.js"></script>
-    <script type="text/javascript" src="~/angular/my-mvc/dist/main.js"></script>
+@section scripts {    
+	
+<script src="~/angular/my-mvc/dist/runtime-es2015.js" type="module"></script>
+<script src="~/angular/my-mvc/dist/runtime-es5.js" nomodule defer></script>
+<script src="~/angular/my-mvc/dist/polyfills-es5.js" nomodule defer></script>
+<script src="~/angular/my-mvc/dist/polyfills-es2015.js" type="module"></script>
+<script src="~/angular/my-mvc/dist/styles-es2015.js" type="module"></script>
+<script src="~/angular/my-mvc/dist/styles-es5.js" nomodule defer></script>
+<script src="~/angular/my-mvc/dist/vendor-es2015.js" type="module"></script>
+<script src="~/angular/my-mvc/dist/vendor-es5.js" nomodule defer></script>
+<script src="~/angular/my-mvc/dist/main-es2015.js" type="module"></script>
+<script src="~/angular/my-mvc/dist/main-es5.js" nomodule defer></script></body>
 
 }
