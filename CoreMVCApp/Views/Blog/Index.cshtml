@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Blog>
+@*@model ApplicationCore.Utils.PaginatedList<ApplicationCore.Entities.Blog>*@
+
+@{
+    ViewData["Title"] = "Index";
+    var convertedModel = Model as ApplicationCore.Utils.PaginatedList<ApplicationCore.Entities.Blog>;
+    var prevDisabled = !convertedModel.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !convertedModel.HasNextPage ? "disabled" : "";
+}
+
+<h1>Index</h1>
+
+<div class="">
+    @using (Html.BeginForm("Index", "Blog", FormMethod.Get))
+    {
+
+        <div class="form-inline my-2 my-lg-0 floatRight" style=" width: 280px;">
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @PlaceHolder = "Search for records",
+           @title = "Type any field value and press search",
+           @class= "form-control mr-sm-2"
+             })
+            <button class="btn btn-secondary my-2 my-sm-0"> Search </button>
+        </div>
+    }
+    <br />
+</div>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Url)
+                </td>
+                <td title="@item.Description">
+                    @if (item.Description.Length > 80)
+                    {
+                        <text> @item.Description.Substring(0,80)  ... </text> 
+                    }
+                    else
+                    {
+                        <text> @item.Description </text>
+                        @*@Html.DisplayFor(modelItem => item.Description)*@
+                    }
+
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.Id })"> <span class="fa fa-pencil-alt"></span> </a> |
+                    <a href="@Url.Action( "Get", new { id=item.Id })"> <span class="fa fa-eye"></span> </a>   |
+                    <a href="@Url.Action( "Delete", new { id=item.Id })"> <span class="fa fa-trash-alt"></span> </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+Page @(convertedModel.TotalPages < convertedModel.PageIndex ? 0 : convertedModel.PageIndex) of @convertedModel.TotalPages
+<br />
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(convertedModel.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(convertedModel.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

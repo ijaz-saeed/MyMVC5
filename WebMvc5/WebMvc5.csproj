@@ -38,6 +38,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -124,11 +125,27 @@
   <ItemGroup>
     <Content Include="angular\my-mvc\dist\favicon.ico" />
     <Content Include="angular\my-mvc\dist\index.html" />
-    <Content Include="angular\my-mvc\dist\main.js" />
-    <Content Include="angular\my-mvc\dist\polyfills.js" />
-    <Content Include="angular\my-mvc\dist\runtime.js" />
-    <Content Include="angular\my-mvc\dist\styles.js" />
-    <Content Include="angular\my-mvc\dist\vendor.js" />
+    <Content Include="angular\my-mvc\dist\main-es2015.js" />
+    <Content Include="angular\my-mvc\dist\main-es2015.js.map" />
+    <Content Include="angular\my-mvc\dist\main-es5.js" />
+    <Content Include="angular\my-mvc\dist\main-es5.js.map" />
+    <Content Include="angular\my-mvc\dist\polyfills-es2015.js" />
+    <Content Include="angular\my-mvc\dist\polyfills-es2015.js.map" />
+    <Content Include="angular\my-mvc\dist\polyfills-es5.js" />
+    <Content Include="angular\my-mvc\dist\polyfills-es5.js.map" />
+    <Content Include="angular\my-mvc\dist\runtime-es2015.js" />
+    <Content Include="angular\my-mvc\dist\runtime-es2015.js.map" />
+    <Content Include="angular\my-mvc\dist\runtime-es5.js" />
+    <Content Include="angular\my-mvc\dist\runtime-es5.js.map" />
+    <Content Include="angular\my-mvc\dist\styles-es2015.js" />
+    <Content Include="angular\my-mvc\dist\styles-es2015.js.map" />
+    <Content Include="angular\my-mvc\dist\styles-es5.js" />
+    <Content Include="angular\my-mvc\dist\styles-es5.js.map" />
+    <Content Include="angular\my-mvc\dist\vendor-es2015.js" />
+    <Content Include="angular\my-mvc\dist\vendor-es2015.js.map" />
+    <Content Include="angular\my-mvc\dist\vendor-es5.js" />
+    <Content Include="angular\my-mvc\dist\vendor-es5.js.map" />
+    <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.cerulean.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -140,11 +157,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="angular\my-mvc\dist\main.js.map" />
-    <Content Include="angular\my-mvc\dist\polyfills.js.map" />
-    <Content Include="angular\my-mvc\dist\runtime.js.map" />
-    <Content Include="angular\my-mvc\dist\styles.js.map" />
-    <Content Include="angular\my-mvc\dist\vendor.js.map" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -280,9 +292,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608271841219_InitialCreate.resx">
       <DependentUpon>201608271841219_InitialCreate.cs</DependentUpon>
