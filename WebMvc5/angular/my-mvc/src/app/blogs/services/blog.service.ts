@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Blog } from '../models/blog';
+import { of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BlogService {
   constructor() {}
@@ -17,6 +18,6 @@ export class BlogService {
       blogs.push(blog);
     }
 
-    return blogs;
+    return of(blogs);
   }
 }

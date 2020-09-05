@@ -43,7 +43,8 @@
          @Html.ActionLink(string.IsNullOrEmpty(item.Url) ? "<NA>" : item.Url, "Edit", new { id = item.Id }) 
         </td>
         <td title="@item.Description">
-            @Html.DisplayFor(modelItem => item.Description)
+
+            @Html.Partial("_stringEllipsis", item.Description)
         </td>
         <td>
            <a href="@Url.Action("Edit", new { id = item.Id })" > <span class="glyphicon glyphicon-pencil"></span> </a> |

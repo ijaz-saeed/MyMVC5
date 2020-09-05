@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.css']
+  styleUrls: ['./blogs.component.css'],
 })
 export class BlogsComponent implements OnInit, OnDestroy {
   blogs: Blog[];
@@ -18,24 +18,28 @@ export class BlogsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions = [];
     this.selectedBlog = null;
-    this.blogs = this.blogService.getData$();
+    this.subscriptions.push(
+      this.blogService.getData$().subscribe((res) => {
+        this.blogs = res;
+      })
+    );
   }
-  delete(blog) {
+  delete(blog: Blog) {
     if (confirm('are you to delete?')) {
       this.blogs.splice(this.blogs.indexOf(blog), 1);
     }
   }
 
-  edit(blog) {
+  edit(blog: Blog) {
     this.selectedBlog = blog;
     this.route.navigate(['/blogs/AddEdit', {}]);
   }
-  view(blog) {
+  view(blog: Blog) {
     this.selectedBlog = blog;
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(subscription => {
+    this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
   }

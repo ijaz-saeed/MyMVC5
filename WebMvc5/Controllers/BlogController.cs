@@ -31,18 +31,19 @@ namespace WebMvc5.Controllers
         /// <param name="page">page</param>
         /// <returns>List of Blogs</returns>
         // GET: /Blog/
-        public ActionResult Index(string searchString, string currentFilter, int? page)
+        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             int pageSize = Consts.PageSize;
-            int pageNumber = (page ?? 1);            
+            int pageNumber = (page ?? 1);
 
             var allData = blogRepo.GetAll().AsNoTracking();
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 page = 1;
-                searchString = searchString.Trim();                
-            }else
+                searchString = searchString.Trim();
+            }
+            else
             {
                 searchString = string.IsNullOrEmpty(currentFilter) ? "" : currentFilter.Trim();
             }
@@ -54,7 +55,8 @@ namespace WebMvc5.Controllers
                 allData = allData.Where(b => b.Url.Contains(searchString) || b.Description.Contains(searchString));
             }
 
-            return View(allData.OrderByDescending(b=> b.Id).ToPagedList(pageNumber, pageSize));
+            var asyncData = await Task.Run(() => { return allData.OrderByDescending(b => b.Id).ToPagedList(pageNumber, pageSize); });
+            return View(asyncData);
         }
 
         /// <summary>

@@ -25,8 +25,8 @@
         <td data-toggle="tooltip"  title="@item.Url">
          @Html.ActionLink(string.IsNullOrEmpty(item.Url) ? "<NA>" : item.Url, "Edit", new { id = item.Id }, new  { @class="ajaxLoad" }) 
         </td>
-        <td data-toggle="tooltip"  title="@item.Description">
-            @Html.DisplayFor(modelItem => item.Description)
+        <td data-toggle="tooltip" title="@item.Description">
+            @Html.Partial("_stringEllipsis", item.Description)
         </td>
         <td>
            <a href="@Url.Action("Edit", new { id = item.Id })" class="ajaxLoad" > <span class="glyphicon glyphicon-pencil"></span> </a> |
