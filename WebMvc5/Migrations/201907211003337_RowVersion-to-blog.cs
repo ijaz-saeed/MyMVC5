@@ -1,8 +1,7 @@
 namespace WebMvc5.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class RowVersiontoblog : DbMigration
     {
         public override void Up()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WebMvc5.ViewModels
+﻿namespace WebMvc5.ViewModels
 {
     public class BlogLiteVM
     {

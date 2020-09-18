@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using WebMvc5.DAL;
-using WebMvc5.DAL.IRepository;
 using WebMvc5.Models;
 using PagedList;
 using System.Threading.Tasks;
@@ -15,7 +10,7 @@ using WebMvc5.Core;
 
 namespace WebMvc5.Controllers
 {
-   
+
     public class BlogController : BaseController
     {
         
