@@ -10,9 +10,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreMVCApp
@@ -39,9 +40,9 @@ namespace CoreMVCApp
 
         private void ConfigureInMemoryDatabases(IServiceCollection services)
         {
-            // use in-memory database
-            services.AddDbContext<BlogDbContext>(c =>
-                c.UseInMemoryDatabase("BlogDb"));
+            //// use in-memory database
+            //services.AddDbContext<BlogDbContext>(c =>
+            //    c.UseInMemoryDatabase("BlogDb"));
 
         }
 
@@ -80,13 +81,11 @@ namespace CoreMVCApp
             services.AddScoped<IBlogRepository, BlogRepository>();
 
             services.AddScoped<IBlogService, BlogService>();
-
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -103,11 +102,12 @@ namespace CoreMVCApp
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+            //app.UseAuthentication();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
