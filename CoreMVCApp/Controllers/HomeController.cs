@@ -15,6 +15,11 @@ namespace CoreMVCApp.Controllers
             return View();
         }
 
+        public IActionResult Health()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

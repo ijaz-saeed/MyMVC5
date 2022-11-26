@@ -13,14 +13,22 @@
 <div class="">
     @using (Html.BeginForm("Index", "Blog", FormMethod.Get))
     {
-
-        <div class="form-inline my-2 my-lg-0 floatRight" style=" width: 280px;">
-            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @PlaceHolder = "Search for records",
-           @title = "Type any field value and press search",
-           @class= "form-control mr-sm-2"
-             })
-            <button class="btn btn-secondary my-2 my-sm-0"> Search </button>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group my-2 my-lg-0 floatRight">
+                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new
+                    {
+                        @PlaceHolder = "Search for records",
+                   @title = "Type any field value and press search",
+                   @class = "form-control"
+                     })
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary my-2 my-sm-0"> Search </button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     }
     <br />
 </div>
@@ -48,16 +56,7 @@
                     @Html.DisplayFor(modelItem => item.Url)
                 </td>
                 <td title="@item.Description">
-                    @if (item.Description.Length > 80)
-                    {
-                        <text> @item.Description.Substring(0,80)  ... </text> 
-                    }
-                    else
-                    {
-                        <text> @item.Description </text>
-                        @*@Html.DisplayFor(modelItem => item.Description)*@
-                    }
-
+                    <partial name="_stringEllipsis" model="@item.Description" />
                 </td>
                 <td>
                     <a href="@Url.Action("Edit", new { id = item.Id })"> <span class="fa fa-pencil-alt"></span> </a> |

@@ -10,6 +10,7 @@ namespace ApplicationCore.Interfaces
 {
     public interface IBlogService
     {
+        void Add(Blog entity);
         IQueryable<Blog> GetAll();
         Task<Blog> GetByIdAsync(int id);
         void Edit(Blog entity);

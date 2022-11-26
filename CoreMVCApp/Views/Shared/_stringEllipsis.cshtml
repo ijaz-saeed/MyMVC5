@@ -1,0 +1,13 @@
+﻿@model string
+
+@if (!string.IsNullOrEmpty(Model))
+{
+    if (Model.Length > 80)
+    {
+        <text> @Model.Substring(0, 80) ... </text>
+    }
+    else
+    {
+        <text>  @Model </text>
+    }
+}

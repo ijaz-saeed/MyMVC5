@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Health";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row mb-1 align-items-center">
+        <label Class="col-sm-3" for="clrversion">CLR Version: </label>
+        <div class="col-sm-9">
+            @Environment.Version.ToString()
+        </div>
+    </div>
+    <div class="row mb-1 align-items-center">
+        <label Class="col-sm-3" for="osversion">OS Version: </label>
+        <div class="col-sm-9">
+            @Environment.OSVersion.ToString()
+        </div>
+    </div>
+</div>

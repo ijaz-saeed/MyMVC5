@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CoreMVCApp
 {
@@ -33,7 +34,7 @@ namespace CoreMVCApp
             //ConfigureInMemoryDatabases(services);
 
             // use real database
-             ConfigureProductionServices(services);
+            InitSqldb(services);
 
             ConfigureServices(services);
         }
@@ -46,7 +47,7 @@ namespace CoreMVCApp
 
         }
 
-        public void ConfigureProductionServices(IServiceCollection services)
+        public void InitSqldb(IServiceCollection services)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), "App_Data");
             // use real database
@@ -63,6 +64,12 @@ namespace CoreMVCApp
                     //TODO: log the exception details
                 }
             });
+            
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            InitSqldb(services);
 
             ConfigureServices(services);
         }
@@ -70,6 +77,9 @@ namespace CoreMVCApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -81,7 +91,10 @@ namespace CoreMVCApp
             services.AddScoped<IBlogRepository, BlogRepository>();
 
             services.AddScoped<IBlogService, BlogService>();
-            services.AddRazorPages();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddRazorPages();           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,11 +112,14 @@ namespace CoreMVCApp
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseStaticFiles();            
 
             app.UseRouting();
-            //app.UseAuthentication();
+
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

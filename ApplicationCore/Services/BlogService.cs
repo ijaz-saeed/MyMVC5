@@ -16,6 +16,12 @@ namespace ApplicationCore.Services
             _blogRepository = blogRepository;
         }
 
+        public void Add(Blog entity)
+        {
+            _blogRepository.Add(entity);
+        }
+
+
         public void Edit(Blog entity)
         {
             _blogRepository.Edit(entity);

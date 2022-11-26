@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using ApplicationCore.Core;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoreMVCApp.Controllers
 {
+    [Authorize()]
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
@@ -63,6 +65,7 @@ namespace CoreMVCApp.Controllers
         }
 
         // GET: /Blog/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace CoreMVCApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind( "Id","Url","Description","RowVersion")] Blog blog)
         {
             if (ModelState.IsValid)
@@ -93,7 +97,29 @@ namespace CoreMVCApp.Controllers
             return View(blog);
         }
 
+        // GET: /Blog/Create
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Create([Bind( "Url", "Description")] Blog blog)
+        {
+            if (ModelState.IsValid)
+            {
+                _blogService.Add(blog);
+                _blogService.Save();
+                return RedirectToAction("Index");
+            }
+            return View(blog);
+        }
+
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -112,6 +138,7 @@ namespace CoreMVCApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             if (id <= 0)
